@@ -5380,9 +5380,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>FlagTsunami</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995382</a:ModificationDate>
+<a:ModificationDate>1677351623</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>tinyint</a:DataType>
+<a:DataType>varchar(4)</a:DataType>
+<a:Length>4</a:Length>
 </o:Column>
 <o:Column Id="o96">
 <a:ObjectID>41D20980-230C-440C-825E-65CA8AC027E6</a:ObjectID>
