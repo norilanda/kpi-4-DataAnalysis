@@ -1,16 +1,24 @@
 import pymysql
-from config import host, user, password, db_name
+from config import host, password, stage_area_user, dwh_area_user, disasters_stage_db, disasters_dwh_db
+from extraction import Extraction
 
 try:
     connection = pymysql.connect(
         host=host,
         port=3306,
-        user=user,
+        user=stage_area_user,
         password=password,
-        database=db_name,
+        database=disasters_stage_db,
         cursorclass=pymysql.cursors.DictCursor
     )
     print("Connection is successfull")
+    extr = Extraction(connection)
+    extr.earthquakes_extraction()
+    # try:
+    #     with connection.cursor() as cursor:
+    #         pass
+    # finally:
+        # connection.close()
 except Exception as e:
     print("Connection FAILED!")
     print (e)
