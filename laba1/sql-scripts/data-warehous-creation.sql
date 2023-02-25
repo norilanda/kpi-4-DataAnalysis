@@ -103,7 +103,7 @@ create table Dim_SubContinent
 (
    SubContinentID       int                            not null,
    ContinentID          int                            null,
-   SubContinentName     varchar(22)                    null,
+   SubContinentName     varchar(40)                    null,
    constraint PK_DIM_SUBCONTINENT primary key clustered (SubContinentID)
 );
 
