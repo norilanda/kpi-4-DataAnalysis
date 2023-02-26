@@ -8,6 +8,12 @@ drop table if exists TsunamiEvent;
 
 drop table if exists VolcanoEvent;
 
+drop table if exists PeopleEffectDescription;
+
+drop table if exists HouseEffectDescription;
+
+drop table if exists DamageEffectDescription;
+
 /*==============================================================*/
 /* Table: Country                                               */
 /*==============================================================*/
@@ -34,28 +40,28 @@ create table Country
 create table Earthquakes
 (
    EarthquakeEventID    int                            not null AUTO_INCREMENT,
-   FlagTsunami          tinyint                        null,
+   FlagTsunami          varchar(4)                     null,
    Year                 int                            null,
    Mo                   int                            null,
    Dy                   int                            null,
    Hr                   int                            null,
    Mn                   int                            null,
-   Sec                  int                            null,
-   FocalDepth           int                            null,
-   EQ_Primary           float                          null,
-   EQ_MAG_MV            float                          null,
-   EQ_MAG_MS            float                          null,
-   EQ_MAG_MB            float                          null,
-   EQ_MAG_ML            float                          null,
-   EQ_MAG_MFA           float                          null,
-   EQ_MAG_UNK           float                          null,
-   Intensity            int                            null,
+   Sec                  varchar(6)                     null,
+   FocalDepth           varchar(6)                     null,
+   EQ_Primary           varchar(6)                     null,
+   EQ_MAG_MV            varchar(6)                     null,
+   EQ_MAG_MS            varchar(6)                     null,
+   EQ_MAG_MB            varchar(6)                     null,
+   EQ_MAG_ML            varchar(6)                     null,
+   EQ_MAG_MFA           varchar(6)                     null,
+   EQ_MAG_UNK           varchar(6)                     null,
+   Intensity            varchar(6)                     null,
    Country              varchar(70)                    null,
    State                varchar(15)                    null,
    Location             varchar(150)                   null,
-   Latitude             float                          null,
-   Longitude            float                          null,
-   RegionCode           int                            null,
+   Latitude             varchar(10)                     null,
+   Longitude            varchar(10)                     null,
+   RegionCode           varchar(6)                     null,
    Deaths               int                            null,
    DeathsDescription    tinyint                        null,
    Missing              int                            null,
@@ -176,5 +182,35 @@ create table VolcanoEvent
    TotalHousesDestroed  int                            null,
    TotalHousesDestroyedDescription tinyint                        null,
    constraint PK_VOLCANOEVENT primary key (VolcanoEventID)
+);
+
+/*==============================================================*/
+/* Table: PeopleEffectDescription                               */
+/*==============================================================*/
+create table PeopleEffectDescription
+(
+   id                   int                            not null,
+   description          varchar(35)                    null,
+   constraint PK_PEOPLEEFFECTDESCRIPTION primary key clustered (id)
+);
+
+/*==============================================================*/
+/* Table: HouseEffectDescription                                */
+/*==============================================================*/
+create table HouseEffectDescription
+(
+   id                   int                            not null,
+   description          varchar(35)                    null,
+   constraint PK_HOUSEEFFECTDESCRIPTION primary key clustered (id)
+);
+
+/*==============================================================*/
+/* Table: DamageEffectDescription                               */
+/*==============================================================*/
+create table DamageEffectDescription
+(
+   id                   int                            not null,
+   description          varchar(35)                    null,
+   constraint PK_DAMAGEEFFECTDESCRIPTION primary key clustered (id)
 );
 

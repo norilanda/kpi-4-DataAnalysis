@@ -5380,9 +5380,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>FlagTsunami</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995382</a:ModificationDate>
+<a:ModificationDate>1677351623</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>tinyint</a:DataType>
+<a:DataType>varchar(4)</a:DataType>
+<a:Length>4</a:Length>
 </o:Column>
 <o:Column Id="o96">
 <a:ObjectID>41D20980-230C-440C-825E-65CA8AC027E6</a:ObjectID>
@@ -5440,9 +5441,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>Sec</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1677055603</a:ModificationDate>
+<a:ModificationDate>1677352749</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>int</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o102">
 <a:ObjectID>D37C18BA-6793-4BCE-A73A-4539C5D885C0</a:ObjectID>
@@ -5450,9 +5452,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>FocalDepth</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>int</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o103">
 <a:ObjectID>DEB85300-D63D-41BC-8123-CAAA9DBB8AF6</a:ObjectID>
@@ -5460,9 +5463,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>EQ_Primary</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o104">
 <a:ObjectID>F1BE2D0B-33AE-4CDA-87AA-AD939B0AC5A2</a:ObjectID>
@@ -5470,9 +5474,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>EQ_MAG_MV</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o105">
 <a:ObjectID>22C13019-ED38-460C-B1C1-79CD0D930FC7</a:ObjectID>
@@ -5480,9 +5485,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>EQ_MAG_MS</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o106">
 <a:ObjectID>89FD44DB-C5B8-404C-948C-1E7EA6FE3A41</a:ObjectID>
@@ -5490,9 +5496,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>EQ_MAG_MB</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o107">
 <a:ObjectID>577BBB8E-062F-449F-B879-7415BFDC3A5C</a:ObjectID>
@@ -5500,9 +5507,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>EQ_MAG_ML</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o108">
 <a:ObjectID>320BD1F3-A476-43E8-8B79-774A8922AEFA</a:ObjectID>
@@ -5510,9 +5518,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>EQ_MAG_MFA</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o109">
 <a:ObjectID>EAD9B391-0BE6-4109-9375-03F5096B566C</a:ObjectID>
@@ -5520,9 +5529,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>EQ_MAG_UNK</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o110">
 <a:ObjectID>7F679239-FEBC-490F-8908-73EBA5B94257</a:ObjectID>
@@ -5530,9 +5540,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>Intensity</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>int</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o111">
 <a:ObjectID>E94768E4-AADF-4A76-8FF9-86F4BF6303DD</a:ObjectID>
@@ -5573,9 +5584,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>Latitude</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353239</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>varchar(10)</a:DataType>
+<a:Length>10</a:Length>
 </o:Column>
 <o:Column Id="o115">
 <a:ObjectID>139AD2CD-6BE9-40F3-8A97-9403496528C9</a:ObjectID>
@@ -5583,9 +5595,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>Longitude</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353239</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>varchar(10)</a:DataType>
+<a:Length>10</a:Length>
 </o:Column>
 <o:Column Id="o116">
 <a:ObjectID>F8FDA59A-13E0-4779-8FE0-8A84CB863B4B</a:ObjectID>
@@ -5593,9 +5606,10 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>RegionCode</a:Code>
 <a:CreationDate>1676994700</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676995749</a:ModificationDate>
+<a:ModificationDate>1677353062</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>int</a:DataType>
+<a:DataType>varchar(6)</a:DataType>
+<a:Length>6</a:Length>
 </o:Column>
 <o:Column Id="o117">
 <a:ObjectID>705883C3-E716-41E5-AE54-402B44F1B7E9</a:ObjectID>
