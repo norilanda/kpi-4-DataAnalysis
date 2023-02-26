@@ -13,7 +13,7 @@ try:
     )
     print("Connection is successfull")
     extr = Extraction(connection)
-    extr.earthquakes_extraction()
+    extr.initial_extraction()
     # try:
     #     with connection.cursor() as cursor:
     #         pass
