@@ -3,6 +3,9 @@ country_table = 'Country'
 earthquake_table = 'Earthquakes'
 tsunami_table = 'TsunamiEvent'
 volcano_table = 'VolcanoEvent'
+damage_description_table = 'DamageEffectDescription'
+house_description_table = 'HouseEffectDescription'
+people_description_table = 'PeopleEffectDescription'
 
 def get_all_column_names(connection: pymysql.Connection, database_name: str, table_name:str):
     cols = []

@@ -189,9 +189,9 @@ create table VolcanoEvent
 /*==============================================================*/
 create table PeopleEffectDescription
 (
-   id                   int                            not null,
+   id                   int                            not null AUTO_INCREMENT,
    description          varchar(35)                    null,
-   constraint PK_PEOPLEEFFECTDESCRIPTION primary key clustered (id)
+   constraint PK_PEOPLEEFFECTDESCRIPTION primary key (id)
 );
 
 /*==============================================================*/
@@ -199,9 +199,9 @@ create table PeopleEffectDescription
 /*==============================================================*/
 create table HouseEffectDescription
 (
-   id                   int                            not null,
+   id                   int                            not null AUTO_INCREMENT,
    description          varchar(35)                    null,
-   constraint PK_HOUSEEFFECTDESCRIPTION primary key clustered (id)
+   constraint PK_HOUSEEFFECTDESCRIPTION primary key (id)
 );
 
 /*==============================================================*/
@@ -209,8 +209,8 @@ create table HouseEffectDescription
 /*==============================================================*/
 create table DamageEffectDescription
 (
-   id                   int                            not null,
+   id                   int                            not null AUTO_INCREMENT,
    description          varchar(35)                    null,
-   constraint PK_DAMAGEEFFECTDESCRIPTION primary key clustered (id)
+   constraint PK_DAMAGEEFFECTDESCRIPTION primary key (id)
 );
 

@@ -15,6 +15,9 @@ class Extraction:
         self.earthquakes_extraction()
         self.volcanos_extraction()
         self.tsuname_extraction_initial()
+        self.effect_extraction(damage_description_file_name, damage_description_table)
+        self.effect_extraction(people_description_file_name, people_description_table)
+        self.effect_extraction(houses_description_file_name, house_description_table)
 
     def continents_extraction(self):
         data = pd.read_csv(continents_file_name, delimiter=',')
@@ -39,7 +42,6 @@ class Extraction:
         columns = get_columns_without_id(self.connection, disasters_stage_db, volcano_table)
         self.write_data_to_database(volcano_table, ', '.join(columns), len(columns), data)
 
-
     def tsuname_extraction_initial(self):
         data = pd.read_csv(tsunamis_file_name_initial, delimiter='\t')
         data = data.replace({np.nan: None})
@@ -50,6 +52,15 @@ class Extraction:
         data = data.to_numpy()
         columns = get_columns_without_id(self.connection, disasters_stage_db, tsunami_table)
         self.write_data_to_database(tsunami_table, ', '.join(columns), len(columns), data)
+
+    def effect_extraction(self, filename, table_name):
+        data = pd.read_json(filename)
+        columns = get_columns_without_id(self.connection, disasters_stage_db, table_name)
+        with self.connection.cursor() as cursor:
+            for record in data['items']:
+                cursor.execute(f"insert into {table_name}({', '.join(columns)}) values ({self.get_format_string(len(columns))})",
+                    record['description'])
+            self.connection.commit()
 
     def write_data_to_database(self, table_name, columns_string, column_number, data):
         with self.connection.cursor() as cursor:
