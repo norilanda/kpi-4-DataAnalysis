@@ -23,7 +23,7 @@ drop table if exists Dim_FlagOtherEvent;
 /*==============================================================*/
 create table Dim_Continent
 (
-   ContinentID          int                            not null,
+   ContinentID          int                            not null AUTO_INCREMENT,
    ContinentName        varchar(17)                    null,
    constraint PK_DIM_CONTINENT primary key (ContinentID)
 );
@@ -33,7 +33,7 @@ create table Dim_Continent
 /*==============================================================*/
 create table Dim_Country
 (
-   CountryID            int                            not null,
+   CountryID            int                            not null AUTO_INCREMENT,
    SubContinentID       int                            null,
    CountryName          varchar(70)                    null,
    constraint PK_DIM_COUNTRY primary key (CountryID)
@@ -44,7 +44,7 @@ create table Dim_Country
 /*==============================================================*/
 create table Dim_DamageDescription
 (
-   DamageDescriptionID  tinyint                        not null,
+   DamageDescriptionID  tinyint                        not null AUTO_INCREMENT,
    DescriptionStatus    varchar(15)                    null,
    LowerBound           int                            null,
    UpperBound           int                            null,
@@ -56,7 +56,7 @@ create table Dim_DamageDescription
 /*==============================================================*/
 create table Dim_Date
 (
-   DateID               int                            not null,
+   DateID               int                            not null AUTO_INCREMENT,
    Year                 int                            null,
    Month                tinyint                        null,
    Day                  tinyint                        null,
@@ -68,7 +68,7 @@ create table Dim_Date
 /*==============================================================*/
 create table Dim_EventType
 (
-   EventTypeID          int                            not null,
+   EventTypeID          int                            not null AUTO_INCREMENT,
    EventTypeName        varchar(18)                    null,
    constraint PK_DIM_EVENTTYPE primary key (EventTypeID)
 );
@@ -78,9 +78,9 @@ create table Dim_EventType
 /*==============================================================*/
 create table Dim_FlagOtherEvent
 (
-   FlagOtherEventID     int                            not null,
+   FlagOtherEventID     int                            not null AUTO_INCREMENT,
    description          varchar(30)                    null,
-   constraint PK_DIM_FLAGOTHEREVENT primary key clustered (FlagOtherEventID)
+   constraint PK_DIM_FLAGOTHEREVENT primary key (FlagOtherEventID)
 );
 
 /*==============================================================*/
@@ -88,12 +88,12 @@ create table Dim_FlagOtherEvent
 /*==============================================================*/
 create table Dim_Location
 (
-   LocationID           int                            not null,
+   LocationID           int                            not null AUTO_INCREMENT,
    CountryID            int                            null,
-   Name                 varchar(100)                   null,
-   Lantitude            float                          null,
-   Longtitude           float                          null,
-   constraint PK_DIM_LOCATION primary key clustered (LocationID)
+   LocationName                 varchar(100)                   null,
+   Latitude            float                          null,
+   Longitude           float                          null,
+   constraint PK_DIM_LOCATION primary key (LocationID)
 );
 
 /*==============================================================*/
@@ -101,10 +101,10 @@ create table Dim_Location
 /*==============================================================*/
 create table Dim_SubContinent
 (
-   SubContinentID       int                            not null,
+   SubContinentID       int                            not null AUTO_INCREMENT,
    ContinentID          int                            null,
    SubContinentName     varchar(40)                    null,
-   constraint PK_DIM_SUBCONTINENT primary key clustered (SubContinentID)
+   constraint PK_DIM_SUBCONTINENT primary key (SubContinentID)
 );
 
 /*==============================================================*/
@@ -112,7 +112,7 @@ create table Dim_SubContinent
 /*==============================================================*/
 create table Fact_Event
 (
-   EventID              int                            not null,
+   EventID              int                            not null AUTO_INCREMENT,
    LocationID           int                            null,
    StartDateID          int                            null,
    EndDateID            int                            null,

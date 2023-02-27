@@ -20,7 +20,7 @@ drop table if exists DamageEffectDescription;
 create table Country
 (
    CountryID            int                            not null AUTO_INCREMENT,
-   Name                 varchar(70)                    null,
+   CountryName                 varchar(70)                    null,
    alpha2               varchar(3)                     null,
    alpha3               varchar(4)                     null,
    CountryCode          int                            null,
@@ -108,7 +108,7 @@ create table TsunamiEvent
    Country              varchar(70)                    null,
    LocationName         varchar(150)                   null,
    Latitude             float                          null,
-   Longtitude           float                          null,
+   Longitude           float                          null,
    MaximumWaterHeightInMeters float                          null,
    NumberOfRunups       int                            null,
    TsunamiMagnitudeAbe  float                          null,
@@ -133,11 +133,11 @@ create table TsunamiEvent
    TotalInjuries        int                            null,
    TotalInjuriesDescription int                            null,
    TotalDamage          int                            null,
-   TotalDamageDescriotion int                            null,
+   TotalDamageDescription int                            null,
    TotalHousesDestroyed int                            null,
    TotalHousesDestroyedDescription int                            null,
-   TotalHousesDemaged   int                            null,
-   TotalHousesDemagedDescription int                            null,
+   TotalHousesDamaged   int                            null,
+   TotalHousesDamagedDescription int                            null,
    constraint PK_TSUNAMIEVENT primary key (TsunamiEventID)
 );
 
@@ -151,18 +151,18 @@ create table VolcanoEvent
    Mo                   int                            null,
    Dy                   int                            null,
    TsunamiEvent         int                            null,
-   EarhquaqeEvent       int                            null,
+   EarthquakeEvent       int                            null,
    VolcanoName          varchar(60)                    null,
    Location             varchar(70)                    null,
    Country              varchar(70)                    null,
    Latitude             float                          null,
    Longitude            float                          null,
-   Elavation            int                            null,
+   Elevation            int                            null,
    Type                 varchar(40)                    null,
    VEI                  tinyint                        null,
    Agent                varchar(15)                    null,
    Deaths               int                            null,
-   DeathsDescrition     tinyint                        null,
+   DeathsDescription     tinyint                        null,
    Missing              int                            null,
    MissingDescription   int                            null,
    Injuries             int                            null,
@@ -179,7 +179,7 @@ create table VolcanoEvent
    TotalInjuriesDescription tinyint                        null,
    TotalDamage          int                            null,
    TotalDamageDescription tinyint                        null,
-   TotalHousesDestroed  int                            null,
+   TotalHousesDestroyed  int                            null,
    TotalHousesDestroyedDescription tinyint                        null,
    constraint PK_VOLCANOEVENT primary key (VolcanoEventID)
 );
