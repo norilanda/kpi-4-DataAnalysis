@@ -1,0 +1,1 @@
+CALL disasters_dwh.insert_damage_effect_table();
