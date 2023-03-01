@@ -16,8 +16,6 @@ drop table if exists Dim_Date;
 
 drop table if exists Dim_EventType;
 
-drop table if exists Dim_FlagOtherEvent;
-
 drop table if exists Dim_EventName;
 
 /*==============================================================*/
@@ -76,16 +74,6 @@ create table Dim_EventType
 );
 
 /*==============================================================*/
-/* Table: Dim_FlagOtherEvent                                    */
-/*==============================================================*/
-create table Dim_FlagOtherEvent
-(
-   FlagOtherEventID     int                            not null AUTO_INCREMENT,
-   description          varchar(30)                    null,
-   constraint PK_DIM_FLAGOTHEREVENT primary key (FlagOtherEventID)
-);
-
-/*==============================================================*/
 /* Table: Dim_Location                                          */
 /*==============================================================*/
 create table Dim_Location
@@ -132,7 +120,6 @@ create table Fact_Event
    EndDateID            int                            null,
    EventTypeID          int                            null,
    EventNameID          int                            null,
-   FlagOtherEventID     int                            null,
    Deaths               int                            null,
    DeathsDescription    tinyint                        null,
    Missing              int                            null,
@@ -210,12 +197,6 @@ alter table Fact_Event
 alter table Fact_Event
    add constraint FK_FACT_EVE_REFERENCE_DIM_DAMA foreign key (TotalDeathsDescription)
       references Dim_DamageDescription (DamageDescriptionID)
-      on update restrict
-      on delete restrict;
-
-alter table Fact_Event
-   add constraint FK_FACT_EVE_REFERENCE_DIM_FLAG foreign key (FlagOtherEventID)
-      references Dim_FlagOtherEvent (FlagOtherEventID)
       on update restrict
       on delete restrict;
 
