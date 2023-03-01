@@ -18,6 +18,8 @@ drop table if exists Dim_EventType;
 
 drop table if exists Dim_FlagOtherEvent;
 
+drop table if exists Dim_EventName;
+
 /*==============================================================*/
 /* Table: Dim_Continent                                         */
 /*==============================================================*/
@@ -107,6 +109,18 @@ create table Dim_SubContinent
    constraint PK_DIM_SUBCONTINENT primary key (SubContinentID)
 );
 
+
+/*==============================================================*/
+/* Table: EventName                                             */
+/*==============================================================*/
+create table Dim_EventName
+(
+   EventNameID          int                            not null AUTO_INCREMENT,
+   EventName            varchar(30)                    null,
+   constraint PK_EVENTNAME primary key clustered (EventNameID)
+);
+
+
 /*==============================================================*/
 /* Table: Fact_Event                                            */
 /*==============================================================*/
@@ -117,6 +131,7 @@ create table Fact_Event
    StartDateID          int                            null,
    EndDateID            int                            null,
    EventTypeID          int                            null,
+   EventNameID          int                            null,
    FlagOtherEventID     int                            null,
    Deaths               int                            null,
    DeathsDescription    tinyint                        null,
@@ -201,6 +216,12 @@ alter table Fact_Event
 alter table Fact_Event
    add constraint FK_FACT_EVE_REFERENCE_DIM_FLAG foreign key (FlagOtherEventID)
       references Dim_FlagOtherEvent (FlagOtherEventID)
+      on update restrict
+      on delete restrict;
+
+alter table Fact_Event
+   add constraint FK_FACT_EVE_REFERENCE_EVENTNAM foreign key (EventNameID)
+      references Dim_EventName (EventNameID)
       on update restrict
       on delete restrict;
 
