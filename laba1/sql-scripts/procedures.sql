@@ -68,36 +68,60 @@ CREATE PROCEDURE disasters_dwh.insert_damage_effect_table()
         DECLARE str varchar(35);
         DECLARE finished INT DEFAULT 0;
         -- declare cursor for employee email
-        DEClARE curs CURSOR FOR
+        DEClARE curs1 CURSOR FOR
                 SELECT description
-                FROM disasters_stage.damageeffectdescription
-                UNION
+                FROM disasters_stage.damageeffectdescription;
+        DEClARE curs2 CURSOR FOR
                 SELECT description
-                FROM disasters_stage.peopleeffectdescription
-                UNION
+                FROM disasters_stage.peopleeffectdescription;
+        DEClARE curs3 CURSOR FOR
                 SELECT description
                 FROM disasters_stage.houseeffectdescription;
         -- declare NOT FOUND handler
         DECLARE CONTINUE HANDLER
             FOR NOT FOUND SET finished = 1;
-        OPEN curs;
 
-        insertValues: LOOP
-            FETCH curs INTO str;
+        OPEN curs1;
+        insertValues1: LOOP
+            FETCH curs1 INTO str;
             IF finished = 1 THEN
-                LEAVE insertValues;
+                LEAVE insertValues1;
             END IF;
             call disasters_dwh.parse_damage_effect(str, @status, @lb,@ub);
-            IF NOT EXISTS(
-                SELECT DamageDescriptionID
-                FROM dim_damagedescription
-                WHERE DescriptionStatus = @status
-                          AND LowerBound = @lb AND (UpperBound = @ub OR UpperBound IS NULL )
-                )
-                THEN
-                    INSERT INTO dim_damagedescription(descriptionstatus, lowerbound, upperbound)
-                        VALUES (@status, @lb, @ub);
+
+            if POSITION('<' in str) != 0
+            then
+                SET @ub = @lb;
+                SET @lb = 0;
             end if ;
-        END LOOP insertValues;
-        CLOSE curs;
+            INSERT INTO dim_damagedescription(descriptionstatus, lowerbound, upperbound)
+                VALUES (@status, @lb, @ub);
+        END LOOP insertValues1;
+        CLOSE curs1;
+        --
+        SET finished = 0;
+        OPEN curs2;
+        insertValues2: LOOP
+            FETCH curs2 INTO str;
+            IF finished = 1 THEN
+                LEAVE insertValues2;
+            END IF;
+            call disasters_dwh.parse_damage_effect(str, @status, @lb,@ub);
+            INSERT INTO dim_peopleeffectdescription(descriptionstatus, lowerbound, upperbound)
+                VALUES (@status, @lb, @ub);
+        END LOOP insertValues2;
+        CLOSE curs2;
+        --
+        SET finished = 0;
+        OPEN curs3;
+        insertValues3: LOOP
+            FETCH curs3 INTO str;
+            IF finished = 1 THEN
+                LEAVE insertValues3;
+            END IF;
+            call disasters_dwh.parse_damage_effect(str, @status, @lb,@ub);
+            INSERT INTO dim_houseeffectdescription(descriptionstatus, lowerbound, upperbound)
+                VALUES (@status, @lb, @ub);
+        END LOOP insertValues3;
+        CLOSE curs3;
     END $$

@@ -12,6 +12,10 @@ drop table if exists Dim_Continent;
 
 drop table if exists Dim_DamageDescription;
 
+drop table if exists Dim_PeopleEffectDescription;
+
+drop table if exists Dim_HouseEffectDescription;
+
 drop table if exists Dim_Date;
 
 drop table if exists Dim_EventType;
@@ -52,6 +56,30 @@ create table Dim_DamageDescription
 );
 
 /*==============================================================*/
+/* Table: Dim_PeopleEffectDescription                           */
+/*==============================================================*/
+create table Dim_PeopleEffectDescription
+(
+   PeopleEffectDescriptionID tinyint                        not null AUTO_INCREMENT,
+   DescriptionStatus    varchar(15)                    null,
+   LowerBound           int                            null,
+   UpperBound           int                            null,
+   constraint PK_DIM_PEOPLEEFFECTDESCRIPTION primary key (PeopleEffectDescriptionID)
+);
+
+/*==============================================================*/
+/* Table: Dim_HouseEffectDescription                            */
+/*==============================================================*/
+create table Dim_HouseEffectDescription
+(
+   HouseEffectDescriptionID tinyint                        not null AUTO_INCREMENT,
+   DescriptionStatus    varchar(15)                    null,
+   LowerBound           int                            null,
+   UpperBound           int                            null,
+   constraint PK_DIM_HOUSEEFFECTDESCRIPTION primary key (HouseEffectDescriptionID)
+);
+
+/*==============================================================*/
 /* Table: Dim_Date                                              */
 /*==============================================================*/
 create table Dim_Date
@@ -81,8 +109,8 @@ create table Dim_Location
    LocationID           int                            not null AUTO_INCREMENT,
    CountryID            int                            null,
    LocationName                 varchar(100)                   null,
-   Latitude            float                          null,
-   Longitude           float                          null,
+   Latitude            decimal(10,3)                          null,
+   Longitude           decimal(10,3)                          null,
    constraint PK_DIM_LOCATION primary key (LocationID)
 );
 
@@ -145,17 +173,18 @@ create table Fact_Event
    TotalHousesDestroyed int                            null,
    TotalHousesDestroyedDescription tinyint                        null,
    constraint PK_FACT_EVENT primary key (EventID),
-   constraint FK_TotalHousesDestroyedDescription foreign key (TotalHousesDestroyedDescription) references Dim_DamageDescription (DamageDescriptionID),
-   constraint FK_TotalHousesDamagedDescription foreign key (TotalHousesDamagedDescription) references Dim_DamageDescription (DamageDescriptionID),
+   constraint FK_TotalHousesDestroyedDescription foreign key (TotalHousesDestroyedDescription) references Dim_HouseEffectDescription (HouseEffectDescriptionID),
+   constraint FK_TotalHousesDamagedDescription foreign key (TotalHousesDamagedDescription) references Dim_HouseEffectDescription (HouseEffectDescriptionID),
    constraint FK_TotalDamageMillionsDollarsDescription foreign key (TotalDamageMillionsDollarsDescription) references Dim_DamageDescription (DamageDescriptionID),
-   constraint FK_TotalInjuriesDescription foreign key (TotalInjuriesDescription) references Dim_DamageDescription (DamageDescriptionID),
-   constraint FK_TotalMissingDescription foreign key (TotalMissingDescription) references Dim_DamageDescription (DamageDescriptionID),
-   constraint FK_HousesDestroyedDescription foreign key (HousesDestroyedDescription) references Dim_DamageDescription (DamageDescriptionID),
-   constraint FK_HousesDamagedDescription foreign key (HousesDamagedDescription) references Dim_DamageDescription (DamageDescriptionID),
+   constraint FK_TotalInjuriesDescription foreign key (TotalInjuriesDescription) references Dim_PeopleEffectDescription (PeopleEffectDescriptionID),
+   constraint FK_TotalMissingDescription foreign key (TotalMissingDescription) references  Dim_PeopleEffectDescription (PeopleEffectDescriptionID),
+   constraint FK_TotalDeathsDescription foreign key (TotalDeathsDescription) references Dim_PeopleEffectDescription (PeopleEffectDescriptionID),
+   constraint FK_HousesDestroyedDescription foreign key (HousesDestroyedDescription) references Dim_HouseEffectDescription (HouseEffectDescriptionID),
+   constraint FK_HousesDamagedDescription foreign key (HousesDamagedDescription) references Dim_HouseEffectDescription (HouseEffectDescriptionID),
    constraint FK_DamageMillionsDollarsDescription foreign key (DamageMillionsDollarsDescription) references Dim_DamageDescription (DamageDescriptionID),
-   constraint FK_InjuriesDescription foreign key (InjuriesDescription) references Dim_DamageDescription (DamageDescriptionID),
-   constraint FK_MissingDescription foreign key (MissingDescription) references Dim_DamageDescription (DamageDescriptionID),
-   constraint FK_DeathsDescription foreign key (DeathsDescription) references Dim_DamageDescription (DamageDescriptionID)
+   constraint FK_InjuriesDescription foreign key (InjuriesDescription) references Dim_PeopleEffectDescription (PeopleEffectDescriptionID),
+   constraint FK_MissingDescription foreign key (MissingDescription) references Dim_PeopleEffectDescription (PeopleEffectDescriptionID),
+   constraint FK_DeathsDescription foreign key (DeathsDescription) references Dim_PeopleEffectDescription (PeopleEffectDescriptionID)
 );
 
 alter table Dim_Country
@@ -194,11 +223,17 @@ alter table Fact_Event
       on update restrict
       on delete restrict;
 
-alter table Fact_Event
-   add constraint FK_FACT_EVE_REFERENCE_DIM_DAMA foreign key (TotalDeathsDescription)
-      references Dim_DamageDescription (DamageDescriptionID)
-      on update restrict
-      on delete restrict;
+# alter table Fact_Event
+#    add constraint FK_FACT_EVE_REFERENCE_DIM_DAMA foreign key (TotalDeathsDescription)
+#       references Dim_DamageDescription (DamageDescriptionID)
+#       on update restrict
+#       on delete restrict;
+
+# alter table Fact_Event
+#    add constraint FK_FACT_EVE_REFERENCE_DIM_DAMA foreign key (TotalDeathsDescription)
+#       references Dim_PeopleEffectDescription (PeopleEffectDescriptionID)
+#       on update restrict
+#       on delete restrict;
 
 alter table Fact_Event
    add constraint FK_FACT_EVE_REFERENCE_EVENTNAM foreign key (EventNameID)

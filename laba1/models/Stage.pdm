@@ -4681,9 +4681,11 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>Latitude</a:Code>
 <a:CreationDate>1676989351</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676994525</a:ModificationDate>
+<a:ModificationDate>1677692923</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>decimal(10,3)</a:DataType>
+<a:Length>10</a:Length>
+<a:Precision>3</a:Precision>
 </o:Column>
 <o:Column Id="o29">
 <a:ObjectID>5654F966-6823-4056-922D-7526D4B7594A</a:ObjectID>
@@ -4691,9 +4693,11 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>Longitude</a:Code>
 <a:CreationDate>1676989351</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676994525</a:ModificationDate>
+<a:ModificationDate>1677692923</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>decimal(10,3)</a:DataType>
+<a:Length>10</a:Length>
+<a:Precision>3</a:Precision>
 </o:Column>
 <o:Column Id="o30">
 <a:ObjectID>8D4B6A2E-83DC-42EC-8DE3-BF421D6BE55C</a:ObjectID>
@@ -5108,9 +5112,11 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>Latitude</a:Code>
 <a:CreationDate>1676993178</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1676994005</a:ModificationDate>
+<a:ModificationDate>1677692914</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>decimal(10,3)</a:DataType>
+<a:Length>10</a:Length>
+<a:Precision>3</a:Precision>
 </o:Column>
 <o:Column Id="o69">
 <a:ObjectID>D95834EB-9DBC-4F7C-B55E-6DD26AE0ACB0</a:ObjectID>
@@ -5118,9 +5124,11 @@ LABL 0 Arial Unicode MS,8,N</a:FontList>
 <a:Code>Longitude</a:Code>
 <a:CreationDate>1676993178</a:CreationDate>
 <a:Creator>ACER</a:Creator>
-<a:ModificationDate>1677505531</a:ModificationDate>
+<a:ModificationDate>1677692914</a:ModificationDate>
 <a:Modifier>ACER</a:Modifier>
-<a:DataType>float</a:DataType>
+<a:DataType>decimal(10,3)</a:DataType>
+<a:Length>10</a:Length>
+<a:Precision>3</a:Precision>
 </o:Column>
 <o:Column Id="o70">
 <a:ObjectID>8CF994BD-58DE-4C57-B782-F6B2441BF092</a:ObjectID>
