@@ -12,10 +12,6 @@ drop table if exists Dim_Continent;
 
 drop table if exists Dim_DamageDescription;
 
-# drop table if exists Dim_PeopleEffectDescription;
-#
-# drop table if exists Dim_HouseEffectDescription;
-
 drop table if exists Dim_Date;
 
 drop table if exists Dim_EventType;
@@ -200,17 +196,6 @@ alter table Fact_Event
       on update restrict
       on delete restrict;
 
-# alter table Fact_Event
-#    add constraint FK_FACT_EVE_REFERENCE_DIM_DAMA foreign key (TotalDeathsDescription)
-#       references Dim_DamageDescription (DamageDescriptionID)
-#       on update restrict
-#       on delete restrict;
-
-# alter table Fact_Event
-#    add constraint FK_FACT_EVE_REFERENCE_DIM_DAMA foreign key (TotalDeathsDescription)
-#       references Dim_PeopleEffectDescription (PeopleEffectDescriptionID)
-#       on update restrict
-#       on delete restrict;
 
 alter table Fact_Event
    add constraint FK_FACT_EVE_REFERENCE_EVENTNAM foreign key (EventNameID)

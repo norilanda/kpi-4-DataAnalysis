@@ -101,3 +101,25 @@ CREATE PROCEDURE disasters_dwh.insert_damage_effect_table()
         END LOOP insertValues;
         CLOSE curs;
     END $$
+
+DELIMITER ;
+DROP FUNCTION IF EXISTS disasters_dwh.find_damage_description_id;
+
+DELIMITER $$
+CREATE FUNCTION disasters_dwh.find_damage_description_id(type enum('people', 'houses', 'damageMillionDollars'), id int)
+RETURNS int
+DETERMINISTIC
+begin
+    DECLARE description_id int;
+    if id IS NULL
+    then
+        return NULL;
+    end if ;
+    SELECT * into description_id
+    FROM(SELECT DamageDescriptionID
+    FROM disasters_dwh.dim_damagedescription
+    WHERE DamageType = type) as t
+    LIMIT id, 1;
+    return description_id;
+end $$
+
