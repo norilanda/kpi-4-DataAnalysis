@@ -14,36 +14,39 @@ class Extraction:
         self.continents_extraction()
         self.earthquakes_extraction()
         self.volcanos_extraction()
-        self.tsuname_extraction_initial()
+        self.tsunami_extraction_initial()
         self.effect_extraction(damage_description_file_name, damage_description_table)
         self.effect_extraction(people_description_file_name, people_description_table)
         self.effect_extraction(houses_description_file_name, house_description_table)
 
-    def continents_extraction(self):
-        data = pd.read_csv(continents_file_name, delimiter=',')
+    def incremental_extraction(self):
+        self.tsunami_extraction_initial(tsunamis_file_name_incremental)
+
+    def continents_extraction(self, file_path=continents_file_name):
+        data = pd.read_csv(file_path, delimiter=',')
         data = data.replace({np.nan: None})
         data = data.to_numpy()
         columns = get_columns_without_id(self.connection, disasters_stage_db, country_table)
         self.write_data_to_database(country_table, ', '.join(columns), len(columns), data)
 
 
-    def earthquakes_extraction(self):
-        data = pd.read_csv(earthquakes_file_name, delimiter=',')
+    def earthquakes_extraction(self, file_path=earthquakes_file_name):
+        data = pd.read_csv(file_path, delimiter=',')
         data = data.drop('I_D', axis=1)
         data = data.replace({np.nan: None})
         data = data.to_numpy()
         columns = get_columns_without_id(self.connection, disasters_stage_db, earthquake_table)
         self.write_data_to_database(earthquake_table, ', '.join(columns), len(columns), data)
 
-    def volcanos_extraction(self):
-        data = pd.read_csv(volcanos_file_name, delimiter=',')
+    def volcanos_extraction(self, file_path=volcanos_file_name):
+        data = pd.read_csv(file_path, delimiter=',')
         data = data.replace({np.nan: None})
         data = data.to_numpy()
         columns = get_columns_without_id(self.connection, disasters_stage_db, volcano_table)
         self.write_data_to_database(volcano_table, ', '.join(columns), len(columns), data)
 
-    def tsuname_extraction_initial(self):
-        data = pd.read_csv(tsunamis_file_name_initial, delimiter='\t')
+    def tsunami_extraction_initial(self, file_path=tsunamis_file_name_initial):
+        data = pd.read_csv(file_path, delimiter='\t')
         data = data.replace({np.nan: None})
         data = data.drop('Search Parameters', axis=1)
         data = data.drop('Vol', axis=1)

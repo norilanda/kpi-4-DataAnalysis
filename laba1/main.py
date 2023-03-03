@@ -14,11 +14,8 @@ try:
     print("Connection is successfull")
     extr = Extraction(connection)
     extr.initial_extraction()
-    # try:
-    #     with connection.cursor() as cursor:
-    #         pass
-    # finally:
-        # connection.close()
+    # extr.incremental_extraction()
+
 except Exception as e:
     print("Connection FAILED!")
     print(e)
