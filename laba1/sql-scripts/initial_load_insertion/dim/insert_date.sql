@@ -8,4 +8,5 @@ FROM disasters_stage.earthquakes
 UNION
 SELECT DISTINCT Year, MO, DY
 FROM disasters_stage.tsunamievent) as t
+WHERE Year IS NOT NULL
 ORDER BY t.Year, MO, DY;

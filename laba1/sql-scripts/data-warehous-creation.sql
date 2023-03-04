@@ -23,9 +23,20 @@ drop table if exists Dim_EventName;
 /*==============================================================*/
 create table Dim_Continent
 (
-   ContinentID          int                            not null AUTO_INCREMENT,
-   ContinentName        varchar(17)                    null,
+   ContinentID          int                            AUTO_INCREMENT,
+   ContinentName        varchar(17)                    not null,
    constraint PK_DIM_CONTINENT primary key (ContinentID)
+);
+
+/*==============================================================*/
+/* Table: Dim_SubContinent                                      */
+/*==============================================================*/
+create table Dim_SubContinent
+(
+   SubContinentID       int                            AUTO_INCREMENT,
+   ContinentID          int                            not null,
+   SubContinentName     varchar(40)                    not null,
+   constraint PK_DIM_SUBCONTINENT primary key (SubContinentID)
 );
 
 /*==============================================================*/
@@ -33,10 +44,26 @@ create table Dim_Continent
 /*==============================================================*/
 create table Dim_Country
 (
-   CountryID            int                            not null AUTO_INCREMENT,
-   SubContinentID       int                            null,
-   CountryName          varchar(70)                    null,
+   CountryID            int                            AUTO_INCREMENT,
+   SubContinentID       int                            not null,
+   CountryName          varchar(70)                    not null,
+   Load_Date            date                           not null DEFAULT '1000-01-01',
+   End_Load_Date        date                           not null DEFAULT '9999-12-31',
+   Old_reference_ID     int                            ,
    constraint PK_DIM_COUNTRY primary key (CountryID)
+);
+
+/*==============================================================*/
+/* Table: Dim_Location                                          */
+/*==============================================================*/
+create table Dim_Location
+(
+   LocationID           int                            AUTO_INCREMENT,
+   CountryID            int                            ,
+   LocationName         varchar(100)                   ,
+   Latitude            decimal(10,3)                   ,
+   Longitude           decimal(10,3)                   ,
+   constraint PK_DIM_LOCATION primary key (LocationID)
 );
 
 /*==============================================================*/
@@ -44,11 +71,11 @@ create table Dim_Country
 /*==============================================================*/
 create table Dim_DamageDescription
 (
-   DamageDescriptionID  tinyint                        not null AUTO_INCREMENT,
-   DescriptionStatus    varchar(15)                    null,
-   LowerBound           int                            null,
-   UpperBound           int                            null,
-   DamageType           enum('people', 'houses', 'damageMillionDollars'),
+   DamageDescriptionID  tinyint                        AUTO_INCREMENT,
+   DescriptionStatus    varchar(15)                    not null,
+   LowerBound           int                            ,
+   UpperBound           int                            ,
+   DamageType           enum('people', 'houses', 'damageMillionDollars') not null,
    constraint PK_DIM_DAMAGEDESCRIPTION primary key (DamageDescriptionID)
 );
 
@@ -57,10 +84,10 @@ create table Dim_DamageDescription
 /*==============================================================*/
 create table Dim_Date
 (
-   DateID               int                            not null AUTO_INCREMENT,
-   Year                 int                            null,
-   Month                tinyint                        null,
-   Day                  tinyint                        null,
+   DateID               int                            AUTO_INCREMENT,
+   Year                 int                            not null,
+   Month                tinyint                        ,
+   Day                  tinyint                        ,
    constraint PK_DIM_DATE primary key (DateID)
 );
 
@@ -69,82 +96,56 @@ create table Dim_Date
 /*==============================================================*/
 create table Dim_EventType
 (
-   EventTypeID          int                            not null AUTO_INCREMENT,
-   EventTypeName        varchar(18)                    null,
+   EventTypeID          int                            AUTO_INCREMENT,
+   EventTypeName        varchar(18)                    not null,
    constraint PK_DIM_EVENTTYPE primary key (EventTypeID)
 );
-
-/*==============================================================*/
-/* Table: Dim_Location                                          */
-/*==============================================================*/
-create table Dim_Location
-(
-   LocationID           int                            not null AUTO_INCREMENT,
-   CountryID            int                            null,
-   LocationName                 varchar(100)                   null,
-   Latitude            decimal(10,3)                          null,
-   Longitude           decimal(10,3)                          null,
-   constraint PK_DIM_LOCATION primary key (LocationID)
-);
-
-/*==============================================================*/
-/* Table: Dim_SubContinent                                      */
-/*==============================================================*/
-create table Dim_SubContinent
-(
-   SubContinentID       int                            not null AUTO_INCREMENT,
-   ContinentID          int                            null,
-   SubContinentName     varchar(40)                    null,
-   constraint PK_DIM_SUBCONTINENT primary key (SubContinentID)
-);
-
 
 /*==============================================================*/
 /* Table: EventName                                             */
 /*==============================================================*/
 create table Dim_EventName
 (
-   EventNameID          int                            not null AUTO_INCREMENT,
-   EventName            varchar(30)                    null,
-   constraint PK_EVENTNAME primary key clustered (EventNameID)
+   EventNameID          int                            AUTO_INCREMENT,
+   EventName            varchar(30)                    not null,
+   constraint PK_EVENTNAME primary key (EventNameID)
 );
-
 
 /*==============================================================*/
 /* Table: Fact_Event                                            */
 /*==============================================================*/
 create table Fact_Event
 (
-   EventID              int                            not null AUTO_INCREMENT,
-   LocationID           int                            null,
-   StartDateID          int                            null,
-   EndDateID            int                            null,
-   EventTypeID          int                            null,
-   EventNameID          int                            null,
-   Deaths               int                            null,
-   DeathsDescription    tinyint                        null,
-   Missing              int                            null,
-   MissingDescription   tinyint                        null,
-   Injuries             int                            null,
-   InjuriesDescription  tinyint                        null,
-   DamageMillionsDollars int                            null,
-   DamageMillionsDollarsDescription tinyint                        null,
-   HousesDamaged        int                            null,
-   HousesDamagedDescription tinyint                        null,
-   HousesDestroyed      int                            null,
-   HousesDestroyedDescription tinyint                        null,
-   TotalDeaths          int                            null,
-   TotalDeathsDescription tinyint                        null,
-   TotalMissing         int                            null,
-   TotalMissingDescription tinyint                        null,
-   TotalInjuries        int                            null,
-   TotalInjuriesDescription tinyint                        null,
-   TotalDamageMillionsDollars int                            null,
-   TotalDamageMillionsDollarsDescription tinyint                        null,
-   TotalHousesDamaged   int                            null,
-   TotalHousesDamagedDescription tinyint                        null,
-   TotalHousesDestroyed int                            null,
-   TotalHousesDestroyedDescription tinyint                        null,
+   EventID              int                            AUTO_INCREMENT,
+   LocationID           int                            not null,
+   StartDateID          int                            not null,
+   EndDateID            int                            ,
+   EventTypeID          int                            not null,
+   Deaths               int                            ,
+   DeathsDescription    tinyint                        ,
+   Missing              int                            ,
+   EventNameID          int                            ,
+   MissingDescription   tinyint                        ,
+   Injuries             int                            ,
+   InjuriesDescription  tinyint                        ,
+   DamageMillionsDollars int                           ,
+   DamageMillionsDollarsDescription tinyint            ,
+   HousesDamaged        int                            ,
+   HousesDamagedDescription tinyint                    ,
+   HousesDestroyed      int                            ,
+   HousesDestroyedDescription tinyint                  ,
+   TotalDeaths          int                            ,
+   TotalDeathsDescription tinyint                      ,
+   TotalMissing         int                            ,
+   TotalMissingDescription tinyint                     ,
+   TotalInjuries        int                            ,
+   TotalInjuriesDescription tinyint                    ,
+   TotalDamageMillionsDollars int                      ,
+   TotalDamageMillionsDollarsDescription tinyint       ,
+   TotalHousesDamaged   int                            ,
+   TotalHousesDamagedDescription tinyint               ,
+   TotalHousesDestroyed int                            ,
+   TotalHousesDestroyedDescription tinyint             ,
    constraint PK_FACT_EVENT primary key (EventID),
    constraint FK_TotalHousesDestroyedDescription foreign key (TotalHousesDestroyedDescription) references Dim_DamageDescription (DamageDescriptionID),
    constraint FK_TotalHousesDamagedDescription foreign key (TotalHousesDamagedDescription) references Dim_DamageDescription (DamageDescriptionID),
@@ -161,45 +162,33 @@ create table Fact_Event
 );
 
 alter table Dim_Country
+   add constraint FK_DIM_COUN_REFERENCE_DIM_COUN foreign key (Old_reference_ID)
+      references Dim_Country (CountryID);
+
+alter table Dim_Country
    add constraint FK_DIM_COUN_REFERENCE_DIM_SUBC foreign key (SubContinentID)
-      references Dim_SubContinent (SubContinentID)
-      on update restrict
-      on delete restrict;
+      references Dim_SubContinent (SubContinentID);
 
 alter table Dim_Location
    add constraint FK_DIM_LOCA_REFERENCE_DIM_COUN foreign key (CountryID)
-      references Dim_Country (CountryID)
-      on update restrict
-      on delete restrict;
+      references Dim_Country (CountryID);
 
 alter table Dim_SubContinent
    add constraint FK_DIM_SUBC_REFERENCE_DIM_CONT foreign key (ContinentID)
-      references Dim_Continent (ContinentID)
-      on update restrict
-      on delete restrict;
+      references Dim_Continent (ContinentID);
 
 alter table Fact_Event
    add constraint FK_FACT_EVE_REFERENCE_DIM_LOCA foreign key (LocationID)
-      references Dim_Location (LocationID)
-      on update restrict
-      on delete restrict;
+      references Dim_Location (LocationID);
 
 alter table Fact_Event
    add constraint FK_FACT_EVE_REFERENCE_DIM_DATE foreign key (StartDateID)
-      references Dim_Date (DateID)
-      on update restrict
-      on delete restrict;
+      references Dim_Date (DateID);
 
 alter table Fact_Event
    add constraint FK_FACT_EVE_REFERENCE_DIM_EVEN foreign key (EventTypeID)
-      references Dim_EventType (EventTypeID)
-      on update restrict
-      on delete restrict;
-
+      references Dim_EventType (EventTypeID);
 
 alter table Fact_Event
    add constraint FK_FACT_EVE_REFERENCE_EVENTNAM foreign key (EventNameID)
       references Dim_EventName (EventNameID)
-      on update restrict
-      on delete restrict;
-

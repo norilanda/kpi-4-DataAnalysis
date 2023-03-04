@@ -15,7 +15,7 @@ SELECT dl.LocationID, dd.DateID, null , de.EventTypeID, den.EventNameID,
        null , null ,
        TotalHousesDestroyed, find_damage_description_id('houses', TotalHousesDestroyedDescription)
 FROM
-    disasters_stage.volcanoevent sv left join disasters_dwh.dim_location dl on (sv.Latitude <=> dl.Latitude AND sv.Longitude <=> dl.Longitude AND sv.Location = dl.LocationName) left join disasters_dwh.dim_date dd on (dd.Year = sv.Year AND dd.Month <=> sv.Mo AND dd.Day <=> sv.Dy) left join  disasters_dwh.dim_eventname den on sv.VolcanoName = den.EventName, disasters_dwh.dim_eventtype de
+    disasters_stage.volcanoevent sv left join disasters_dwh.dim_location dl on (sv.Latitude <=> dl.Latitude AND sv.Longitude <=> dl.Longitude AND sv.Location <=> dl.LocationName) left join disasters_dwh.dim_date dd on (dd.Year = sv.Year AND dd.Month <=> sv.Mo AND dd.Day <=> sv.Dy) join  disasters_dwh.dim_eventname den on sv.VolcanoName = den.EventName, disasters_dwh.dim_eventtype de
 WHERE
      de.EventTypeName = 'volcano'
 UNION
@@ -32,7 +32,7 @@ SELECT dl.LocationID, dd.DateID, null , de.EventTypeID, null ,
        TotalDamage, find_damage_description_id('damageMillionDollars', TotalDamageDescription),
        TotalHousesDamaged, find_damage_description_id('houses', TotalHousesDamagedDescription), TotalHousesDestroyed, find_damage_description_id('houses', TotalHousesDestroyedDescription)
 FROM
-    disasters_stage.tsunamievent st left join disasters_dwh.dim_location dl on dl.Latitude <=> st.Latitude AND dl.Longitude <=> st.Longitude AND dl.LocationName = st.LocationName left join disasters_dwh.dim_date dd on (st.Year = dd.Year AND st.Mo <=> dd.Month AND st.Dy <=> dd.Day), disasters_dwh.dim_eventtype de
+    disasters_stage.tsunamievent st left join disasters_dwh.dim_location dl on dl.Latitude <=> st.Latitude AND dl.Longitude <=> st.Longitude AND dl.LocationName <=> st.LocationName join disasters_dwh.dim_date dd on (st.Year = dd.Year AND st.Mo <=> dd.Month AND st.Dy <=> dd.Day), disasters_dwh.dim_eventtype de
 WHERE
     de.EventTypeName = 'tsunami'
 UNION
@@ -50,6 +50,10 @@ SELECT dl.LocationID, dd.DateID, null , de.EventTypeID, null ,
        TotalHousesDamaged, find_damage_description_id('houses', TotalHousesDamageDescription),
        TotalHousesDestroyed, find_damage_description_id('houses', TotalHousesDestroyedDescription)
 FROM
-    disasters_stage.earthquakes se left join disasters_dwh.dim_location dl on (dl.Latitude <=> se.Latitude AND dl.Longitude <=> se.Longitude AND dl.LocationName = disasters_dwh.delete_country_from_location(se.Location)) left join disasters_dwh.dim_date dd on (dd.Year = se.Year AND dd.Month <=> se.Mo AND dd.Day <=> se.Dy), disasters_dwh.dim_eventtype de
+        disasters_stage.earthquakes se left join disasters_dwh.dim_location dl on
+        ((dl.Latitude <=> se.Latitude OR dl.Latitude IS NULL AND NOT EXISTS(select se.Latitude where se.Latitude REGEXP '^[A-Za-z0-9]+$'))
+             AND
+         (dl.Longitude <=> se.Longitude OR dl.Longitude IS NULL AND NOT EXISTS(select se.Longitude where se.Longitude REGEXP '^[A-Za-z0-9]+$')) AND dl.LocationName <=> disasters_dwh.delete_country_from_location(se.Location))
+     join disasters_dwh.dim_date dd on (dd.Year = se.Year AND dd.Month <=> se.Mo AND dd.Day <=> se.Dy), disasters_dwh.dim_eventtype de
 WHERE
      de.EventTypeName = 'earthquake';
