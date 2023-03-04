@@ -104,7 +104,7 @@ create table TsunamiEvent
    TsunamiEventValidity tinyint                        null,
    TsunamiCauseCode     tinyint                        null,
    EarthquakeMagnitude  float                          null,
-   Deposits             tinyint                        null,
+   Deposits             int                        null,
    Country              varchar(70)                    null,
    LocationName         varchar(150)                   null,
    Latitude             decimal(10,3)                          null,

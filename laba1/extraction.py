@@ -51,8 +51,9 @@ class Extraction:
         data = data.drop('Search Parameters', axis=1)
         data = data.drop('Vol', axis=1)
         data = data.drop('More Info', axis=1)
-
+        data = data.dropna(how='all')
         data = data.to_numpy()
+
         columns = get_columns_without_id(self.connection, disasters_stage_db, tsunami_table)
         self.write_data_to_database(tsunami_table, ', '.join(columns), len(columns), data)
 
