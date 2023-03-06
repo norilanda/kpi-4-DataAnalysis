@@ -1,3 +1,12 @@
+DROP PROCEDURE IF EXISTS insert_event_type;
+
+DELIMITER $$
+CREATE PROCEDURE disasters_dwh.insert_event_type(type VARCHAR(20))
+    BEGIN
+        INSERT INTO disasters_dwh.dim_eventtype(EventTypeName) VALUES (type);
+    end;
+
+DELIMITER ;
 DROP FUNCTION IF EXISTS delete_country_from_location;
 
 DELIMITER $$
@@ -123,3 +132,22 @@ begin
     return description_id;
 end $$
 
+
+DROP FUNCTION IF EXISTS transform_country_name;
+DELIMITER $$
+CREATE FUNCTION disasters_dwh.transform_country_name(country VARCHAR(100))
+RETURNS VARCHAR(100)
+DETERMINISTIC
+BEGIN
+    SET country = lcase(country);
+    SET country = REPLACE(country, ',', '');
+    SET country = REGEXP_REPLACE(country, '(( |,|.)usa( |,|.))|^usa$|^usa( |,|.)|( |,|.)usa$|u.s.', ' united states ');
+    SET country = REGEXP_REPLACE(country, '^uk$', ' united kingdom ');
+    SET country = REGEXP_REPLACE(country, ' is.', ' islands ');
+    if country REGEXP '^d(.)*r(.)*c(.)*$|^d(.)*r(.)*c(.)*( )|( )d(.)*r(.)*c(.)*$|( )d(.)*r(.)*c(.)*( )' then
+        set country = 'Democratic Republic of the Congo';
+    end if ;
+
+    SET country = TRIM(country);
+    RETURN country;
+end $$
