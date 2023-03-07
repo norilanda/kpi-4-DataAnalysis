@@ -24,7 +24,7 @@ drop table if exists Dim_EventName;
 create table Dim_Continent
 (
    ContinentID          int                            AUTO_INCREMENT,
-   ContinentName        varchar(17)                    not null,
+   ContinentName        varchar(17)                    not null UNIQUE,
    constraint PK_DIM_CONTINENT primary key (ContinentID)
 );
 
@@ -35,7 +35,7 @@ create table Dim_SubContinent
 (
    SubContinentID       int                            AUTO_INCREMENT,
    ContinentID          int                            not null,
-   SubContinentName     varchar(40)                    not null,
+   SubContinentName     varchar(40)                    not null UNIQUE,
    constraint PK_DIM_SUBCONTINENT primary key (SubContinentID)
 );
 

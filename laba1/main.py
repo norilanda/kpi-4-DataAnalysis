@@ -13,8 +13,8 @@ try:
     )
     print("Connection is successfull")
     extr = Extraction(connection)
-    # extr.initial_extraction()
-    extr.incremental_extraction()
+    extr.initial_extraction()
+    #extr.incremental_extraction()
 
 except Exception as e:
     print("Connection FAILED!")
